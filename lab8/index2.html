@@ -1,0 +1,47 @@
+<!-- wap code to design nagivation bar using flexbox -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ritik</title>
+
+<style>
+    .a{
+        display:flex;
+        flex-direction:row;
+    }
+
+    .b{
+        background-color: rgb(14, 126, 224);
+        padding:10px;
+        font-size: 30px;
+        width: 100%;
+        text-align:center;
+    }
+
+    @media(max-width:1000px){
+    .a{
+        flex-direction:column;
+    }
+ }
+ /* by me .b:hover{
+    background-color: yellow;
+    width:500px;
+    transition: 2s, width 2s,;
+ } */
+
+
+</style>
+
+</head>
+
+<body>
+<h1 style="text-align: center;"> Ritik Thakur</h1>
+<div class="a">
+<div class="b">Home</div>
+<div class="b">Product</div>
+<div class="b">Contact Us</div>
+</div>
+
+</body>
+</html>

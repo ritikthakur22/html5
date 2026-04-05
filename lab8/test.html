@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Ritik</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .center-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      width: 400px;
+      height: 100px;
+      background: red;
+      transition: transform 0.8s ease;
+      transform-origin: center;
+    }
+
+    .box:hover {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+<body>
+  <h1>Ritik Thakur</h1>
+
+  <div class="center-area">
+    <div class="box"></div>
+  </div>
+</body>
+</html>
