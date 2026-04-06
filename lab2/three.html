@@ -1,84 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
-    <link rel="stylesheet" href="3.css">
+<meta charset="UTF-8">
+<title>Student Registration Form</title>
 </head>
-<body bgcolor="beige">
 
-    <form>
-        <div>
-        <label>Name:</label> <br>
-        <input type="text"> <br>
-         </div>
+<body>
 
-         <div>
-        <label> Roll no:</label> <br>
-        <input type="text"> <br>
-         </div>
+<form action="submit.php" method="post">
 
+<fieldset>
+<legend>Student Registration</legend>
 
-          <div>
-        <label>Phone no:</label> <br>
-        <input type="text"> <br>
-         </div>
+<!-- Full Name -->
+<label for="name">Full Name:</label><br>
+<input type="text" id="name" name="name" placeholder="Enter full name" required>
+<br><br>
 
-         <div>
-        <label> DOB </label> <br>
-        <input type="date"> <br>
-         </div>
+<!-- Email with Rule -->
+<label for="email">Email:</label><br>
+<input type="email" id="email" name="email"
+placeholder="example@gmail.com"
+pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+required>
+<br><br>
 
-         <div>
-        <label> Email:</label> <br>
-        <input type="email"> <br>
-         </div>
+<!-- Password with Rule -->
+<label for="pass">Password:</label><br>
+<input type="password" id="pass" name="password"
+pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}"
+placeholder="Strong password"
+title="Min 8 chars with uppercase, lowercase, number, special char"
+required>
+<br><br>
 
-         <div>
-        <label>Address:</label> <br>
-        <textarea rows="5" col="5"></textarea> <br>
-         </div>
+<!-- Telephone -->
+<label for="phone">Telephone:</label><br>
+<input type="tel" id="phone" name="phone"
+pattern="[0-9]{10}" placeholder="10 digit number" required>
+<br><br>
 
-         <div>
-        <label>Gender</label> <br>
-        <input type="radio" name="gender">male <br>
-        <input type="radio" name="gender">female <br>
-        <input type="radio" name="gender">other <br>
-         </div>
+<!-- DOB -->
+<label for="dob">Date of Birth:</label><br>
+<input type="date" id="dob" name="dob" required>
+<br><br>
 
-         <div>
-        <select>
-            <option value="cse">cse</option>
-            <option value="bba">bba</option>
-            <option value="bca">bca</option>
-            <option value="mba">mba</option>
-        </select> <br>
-         </div>
+<!-- Gender -->
+<label>Gender:</label><br>
+<input type="radio" name="gender" value="male" required> Male
+<input type="radio" name="gender" value="female"> Female
+<br><br>
 
-        <div id="YEAR">
-        <label> year</label>
-        <select>
-            <option value="1st">1st</option>
-            <option value="2nd">2nd</option>
-            <option value="3rd">3rd</option>
-            <option value="4th">4th</option>
-        </select> <br>
-         </div>
+<!-- Course -->
+<label for="course">Course:</label><br>
+<select id="course" name="course" required>
+<option value="">Select</option>
+<option>B.Tech</option>
+<option>BCA</option>
+<option>MCA</option>
+</select>
+<br><br>
 
-         <div>
-        <label> Password:</label> <br>
-        <input type="Password">
-         </div>
+<!-- Skills (Multi-select) -->
+<label for="skills">Skills:</label><br>
+<select id="skills" name="skills" multiple size="3">
+<option>HTML</option>
+<option>CSS</option>
+<option>JavaScript</option>
+<option>Python</option>
+</select>
+<br><br>
 
-         <div>
-        <label>Confirm Password:</label> <br>
-        <input type="Password"> <br>
-         </div>
+<!-- Datalist -->
+<label for="browser">Preferred Browser:</label><br>
+<input list="browsers" id="browser" name="browser">
+<datalist id="browsers">
+<option value="Chrome">
+<option value="Firefox">
+<option value="Edge">
+<option value="Safari">
+</datalist>
+<br><br>
 
-        <input type="submit">
+<!-- Address -->
+<label for="address">Address:</label><br>
+<textarea id="address" name="address" rows="4" cols="40"
+placeholder="Enter full address"></textarea>
+<br><br>
 
-    </form>
+<!-- City, State, Zip -->
+<label>City:</label>
+<input type="text" name="city" required>
+
+<label>State:</label>
+<input type="text" name="state" required>
+
+<label>Zip Code:</label>
+<input type="text" name="zip" pattern="[0-9]{6}" required>
+<br><br>
+
+<!-- Upload Photo -->
+<label for="photo">Upload Photo:</label><br>
+<input type="file" id="photo" name="photo" accept="image/*">
+<br><br>
+
+<!-- Buttons -->
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+
+</fieldset>
+
+</form>
 
 </body>
 </html>
