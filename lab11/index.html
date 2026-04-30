@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritik</title>
+    <style>
+        .item{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+            color:yellow;
+            display: inline-block;
+            position:static;
+        }
+        #b{
+           position:relative;
+           top:20px;
+           left: 30px;
+        }
+        #c{
+            position: absolute;
+            top:20px;
+            left: 30px;
+        }
+        #d{
+           position: sticky;
+           top:0px;
+           
+        }
+        #e{
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+        }
+        body{
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    
+        <div id="a" class="item">static</div>
+        <div id="b" class="item">realtive</div>
+        <div id="c" class="item">absolute</div>
+        <div id="d" class="item">sticky</div>
+        <div id="e" class="item">fixed</div>
+</body>
+</html>
