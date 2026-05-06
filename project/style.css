@@ -104,3 +104,74 @@ span{
     justify-content: center;
     align-items: flex-end;
 }
+
+/* panel */
+.panel{
+    height: 40px;
+    background-color: #222f2b;
+    display: flex;
+  
+}
+
+/* Add styles for child elements AI*/
+.panel-all,
+.panel-ops {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 15px;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+    
+}
+
+.panle-ops{
+    display: inline;
+    width: 70%;
+    font: size 0.85em;
+    font-weight: 700;
+    
+}
+
+
+/* hero section */
+.hero-section{
+    background-image: url("hero_image.jpg");
+    height: 700px;
+    background-size: cover;
+}
+
+.hero-msg{
+    background-color: white;
+    color: black;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* shop section */
+.shop-section{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #e2e7e6;
+}
+
+.box{
+    border: 2px solid black;
+    height: 400px;
+    width: 23%;
+    background-color: white;
+    text-align: center;
+}
+
+.box-image1{
+    height: 300px;
+    width: 90%;
+    
+}
+
+.box-image2{
+    
+}
