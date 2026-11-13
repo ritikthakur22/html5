@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 &amp; CSS3 Lab Series | Ritik Thakur</title>
+  <meta name="description" content="A complete collection of 11 Web Development laboratory experiments and an Amazon Clone capstone project built with HTML5, CSS3, and JavaScript.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b14;
+      --bg-card: rgba(18, 20, 36, 0.7);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.35);
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.3);
+      --orange: #f59e0b;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    /* Ambient background gradients */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -15%;
+      right: -10%;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Section */
+    header {
+      padding: 56px 0 36px;
+      text-align: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #60a5fa;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: clamp(15px, 2vw, 17px);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 28px;
+    }
+
+    .header-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 4px 18px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--primary-glow);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e5e7eb;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 28px 0 40px;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: #ffffff;
+    }
+    .filter-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 2px 12px var(--primary-glow);
+    }
+
+    /* Featured Project Hero Card */
+    .featured-card {
+      background: linear-gradient(135deg, rgba(24, 27, 48, 0.85) 0%, rgba(15, 17, 32, 0.95) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 32px;
+      align-items: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fbbf24;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .featured-title {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .featured-desc {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .featured-preview-box {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      background: #111;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .featured-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .featured-card:hover .featured-preview-box img {
+      transform: scale(1.04);
+    }
+
+    /* Grid of Lab Cards */
+    .labs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .lab-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      backdrop-filter: blur(12px);
+    }
+    .lab-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.35);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .lab-top {
+      margin-bottom: 18px;
+    }
+
+    .lab-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .lab-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+
+    .lab-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .lab-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .lab-files-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .file-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .file-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 860px) {
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .labs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge-pill">&lt;/&gt; Web Technology &amp; HTML5 Lab Series</span>
+      <h1>Interactive Experiments Showcase</h1>
+      <p class="subtitle">A full university laboratory curriculum spanning HTML5 semantic document structures, CSS3 styling, Flexbox, Grid, 2D transitions, and a capstone Amazon Clone.</p>
+      
+      <div class="header-links">
+        <a href="https://github.com/ritikthakur22/html5" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="project/index.html" class="btn btn-primary">
+          <span>🛒</span> Launch Amazon Clone Capstone
+        </a>
+      </div>
+    </header>
+
+    <!-- Filter Buttons -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCategory('all')">All Experiments (12)</button>
+      <button class="filter-btn" onclick="filterCategory('html')">HTML Core (Labs 1-3)</button>
+      <button class="filter-btn" onclick="filterCategory('css')">CSS Styling (Labs 4-8)</button>
+      <button class="filter-btn" onclick="filterCategory('layout')">Flexbox &amp; Grid (Labs 9-11)</button>
+      <button class="filter-btn" onclick="filterCategory('project')">Capstone Project</button>
+    </div>
+
+    <!-- Featured Capstone Project -->
+    <div class="featured-card" data-category="project">
+      <div class="featured-info">
+        <span class="featured-badge">⭐ Capstone Project</span>
+        <h2 class="featured-title">Amazon E-Commerce Landing Page Clone</h2>
+        <p class="featured-desc">A full-featured clone of Amazon's multi-tier interface. Built with pure HTML5 and semantic CSS3, implementing the global top header, language selector, multi-level dropdowns, hero carousel banner, 8 dynamic product category tiles, and complete multi-column footer.</p>
+        <div class="tag-group">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS Grid</span>
+          <span class="tag">Flexbox</span>
+          <span class="tag">E-Commerce UI</span>
+          <span class="tag">Multi-tier Navbar</span>
+        </div>
+        <a href="project/index.html" class="btn btn-primary">
+          Launch Live Project &nearr;
+        </a>
+      </div>
+      <div class="featured-preview-box">
+        <img src="project/hero_image.jpg" alt="Amazon Clone Hero Preview">
+      </div>
+    </div>
+
+    <!-- Labs Grid -->
+    <div class="labs-grid" id="labsGrid">
+
+      <!-- LAB 1 -->
+      <div class="lab-card" data-category="html">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 01</span>
+            <span class="tag">HTML</span>
+          </div>
+          <h3 class="lab-title">HTML Fundamentals &amp; Forms</h3>
+          <p class="lab-desc">Introduction to basic HTML tags, headings, paragraphs, and standard form controls with input elements.</p>
+          <div class="tag-group">
+            <span class="tag">&lt;form&gt;</span>
+            <span class="tag">&lt;input&gt;</span>
+            <span class="tag">&lt;label&gt;</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab1/one.html" class="file-link"><span>📄</span> one.html</a>
+          <a href="lab1/two.html" class="file-link"><span>📄</span> two.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 2 -->
+      <div class="lab-card" data-category="html">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 02</span>
+            <span class="tag">HTML / CSS</span>
+          </div>
+          <h3 class="lab-title">CSS Selectors &amp; Fieldsets</h3>
+          <p class="lab-desc">Exploring inline, internal, and external stylesheets alongside structured student registration forms with fieldsets and legends.</p>
+          <div class="tag-group">
+            <span class="tag">&lt;fieldset&gt;</span>
+            <span class="tag">Selectors</span>
+            <span class="tag">External CSS</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab2/one.html" class="file-link"><span>📄</span> one.html</a>
+          <a href="lab2/two.html" class="file-link"><span>📄</span> two.html</a>
+          <a href="lab2/three.html" class="file-link"><span>📄</span> three.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 3 -->
+      <div class="lab-card" data-category="html">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 03</span>
+            <span class="tag">HTML</span>
+          </div>
+          <h3 class="lab-title">Lists &amp; Complex HTML Tables</h3>
+          <p class="lab-desc">Ordered, unordered, and nested lists, paired with complex table structures utilizing rowspan and colspan for schedules.</p>
+          <div class="tag-group">
+            <span class="tag">&lt;ul&gt; &lt;ol&gt;</span>
+            <span class="tag">&lt;table&gt;</span>
+            <span class="tag">rowspan/colspan</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab3/four.html" class="file-link"><span>📄</span> four.html</a>
+          <a href="lab3/five.html" class="file-link"><span>📄</span> five.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 4 -->
+      <div class="lab-card" data-category="css">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 04</span>
+            <span class="tag">CSS</span>
+          </div>
+          <h3 class="lab-title">CSS Box Model &amp; Borders</h3>
+          <p class="lab-desc">Detailed hands-on demonstration of margins, paddings, borders, content dimensions, and box-sizing calculations.</p>
+          <div class="tag-group">
+            <span class="tag">box-sizing</span>
+            <span class="tag">margin/padding</span>
+            <span class="tag">border</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab4/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab4/index2.html" class="file-link"><span>📄</span> index2.html</a>
+          <a href="lab4/test.html" class="file-link"><span>📄</span> test.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 5 -->
+      <div class="lab-card" data-category="css">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 05</span>
+            <span class="tag">HTML5 / CSS</span>
+          </div>
+          <h3 class="lab-title">Semantic HTML5 &amp; Backgrounds</h3>
+          <p class="lab-desc">Implementation of semantic tags (&lt;header&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;footer&gt;) and background image styling.</p>
+          <div class="tag-group">
+            <span class="tag">&lt;header&gt;</span>
+            <span class="tag">&lt;nav&gt;</span>
+            <span class="tag">background-image</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab5/index.html" class="file-link"><span>📄</span> index.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 6 -->
+      <div class="lab-card" data-category="css">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 06</span>
+            <span class="tag">CSS</span>
+          </div>
+          <h3 class="lab-title">Pseudo-Classes &amp; Hover Effects</h3>
+          <p class="lab-desc">Utilizing CSS pseudo-classes (:hover, :focus, :active) to create interactive styling and dynamic card states.</p>
+          <div class="tag-group">
+            <span class="tag">:hover</span>
+            <span class="tag">transitions</span>
+            <span class="tag">interactivity</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab6/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab6/index1.html" class="file-link"><span>📄</span> index1.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 7 -->
+      <div class="lab-card" data-category="css">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 07</span>
+            <span class="tag">CSS</span>
+          </div>
+          <h3 class="lab-title">Transitions &amp; Sizing Shifts</h3>
+          <p class="lab-desc">Smooth dimension transitions, background color shifts, and fluid scaling effects on user hover interactions.</p>
+          <div class="tag-group">
+            <span class="tag">transition</span>
+            <span class="tag">color shift</span>
+            <span class="tag">dimensions</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab7/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab7/index2.html" class="file-link"><span>📄</span> index2.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 8 -->
+      <div class="lab-card" data-category="css">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 08</span>
+            <span class="tag">CSS3</span>
+          </div>
+          <h3 class="lab-title">CSS3 2D Transformations</h3>
+          <p class="lab-desc">Applying 2D spatial transformations including rotate(), scale(), and translate() to manipulate DOM geometries.</p>
+          <div class="tag-group">
+            <span class="tag">rotate()</span>
+            <span class="tag">transform</span>
+            <span class="tag">2D Graphics</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab8/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab8/index2.html" class="file-link"><span>📄</span> index2.html</a>
+          <a href="lab8/test.html" class="file-link"><span>📄</span> test.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 9 -->
+      <div class="lab-card" data-category="layout">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 09</span>
+            <span class="tag">Layout</span>
+          </div>
+          <h3 class="lab-title">CSS Flexbox Architecture</h3>
+          <p class="lab-desc">Comprehensive layout management with Flexbox: flex-direction, justify-content, align-items, and responsive cards.</p>
+          <div class="tag-group">
+            <span class="tag">display: flex</span>
+            <span class="tag">justify-content</span>
+            <span class="tag">align-items</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab9/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab9/index2.html" class="file-link"><span>📄</span> index2.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 10 -->
+      <div class="lab-card" data-category="layout">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 10</span>
+            <span class="tag">Layout</span>
+          </div>
+          <h3 class="lab-title">CSS Grid Template Areas</h3>
+          <p class="lab-desc">Two-dimensional layout design using CSS Grid: grid-template-columns, grid-template-rows, and named grid areas.</p>
+          <div class="tag-group">
+            <span class="tag">display: grid</span>
+            <span class="tag">grid-template-areas</span>
+            <span class="tag">2D Grid</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab10/index.html" class="file-link"><span>📄</span> index.html</a>
+          <a href="lab10/index2.html" class="file-link"><span>📄</span> index2.html</a>
+          <a href="lab10/task.html" class="file-link"><span>📄</span> task.html</a>
+        </div>
+      </div>
+
+      <!-- LAB 11 -->
+      <div class="lab-card" data-category="layout">
+        <div class="lab-top">
+          <div class="lab-header-row">
+            <span class="lab-pill">LAB 11</span>
+            <span class="tag">CSS</span>
+          </div>
+          <h3 class="lab-title">CSS Positioning Modes</h3>
+          <p class="lab-desc">Exploring all CSS positioning behaviors: static, relative, absolute, sticky, and fixed viewport anchors.</p>
+          <div class="tag-group">
+            <span class="tag">position: relative</span>
+            <span class="tag">absolute</span>
+            <span class="tag">sticky &amp; fixed</span>
+          </div>
+        </div>
+        <div class="lab-files-list">
+          <a href="lab11/index.html" class="file-link"><span>📄</span> index.html</a>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; 2025&ndash;2026 Ritik Thakur &bull; Web Technology Laboratory Series &bull; Licensed under Apache-2.0</p>
+      <p style="margin-top: 6px;">
+        <a href="https://github.com/ritikthakur22" target="_blank" rel="noopener noreferrer">GitHub Profile</a> &bull;
+        <a href="https://www.linkedin.com/in/ritikthakur22/" target="_blank" rel="noopener noreferrer">LinkedIn</a> &bull;
+        <a href="https://www.ritikthakur.com.np/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function filterCategory(cat) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.lab-card, .featured-card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (cat === 'all' || itemCat === cat) {
+          card.style.display = card.classList.contains('featured-card') ? 'grid' : 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
